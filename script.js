@@ -1,6 +1,6 @@
 // ==== Todo CRUD Management ====
 // Array to store todos
-let todos = []
+let todos = [];
 // DOM Elements
 const todoForm = document.getElementById('todo-form');
 const todoInput = document.getElementById('todo-input');
@@ -12,13 +12,24 @@ function renderTodos() {
     todos.forEach((todo, index) =>{
         const li = document.createElement('li');
         li.className = 'todo-item';
-        li.innerHTML - `
+        li.innerHTML = `
             <span>${todo}</span>
-            <button onclick="editionTodo(${index})">Edit</button>
+            <button onclick="editTodo(${index})">Edit</button>
             <button onclick="deleteTodo(${index})">Delete</button>
-            `;
-            todoList.appendChild(li);
+         `;
+         todoList.appendChild(li);
     });
+}
+
+//Function to add todo
+function addTodo(event){
+    event.preventDefault();
+    const newTodo = todoInput.value.trim();
+    if (newTodo){
+        todos.push(newTodo);
+        todoInput.value = '',
+        renderTodos();
+    }
 }
 
 // Function to edit a todo
@@ -30,16 +41,6 @@ function editTodo(index) {
     }
 }
 
-//Function to add todo
-function editTodo(event){
-    event.preventDefault();
-    const newTodo = todoInput.ariaValueMax.trim();
-    if (newTodo){
-        todos.push(newTodo);
-        todoInput.value = '',
-        rederTodos();
-    }
-}
 
 //Function to delete a todo
 function deleteTodo(index) {
@@ -52,4 +53,4 @@ function deleteTodo(index) {
 todoForm.addEventListener('submit', addTodo);
 
 //initial render
-rederTodos();
+renderTodos();
